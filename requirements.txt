@@ -1,0 +1,2 @@
+# This file is for application dependencies.
+# It is intentionally left empty as there are no external dependencies yet.
