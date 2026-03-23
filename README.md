@@ -45,12 +45,7 @@ Follow these instructions to get a copy of the project up and running on your lo
     pip install -r requirements.txt -r requirements-dev.txt
     ```
 
-4.  **Run the script:**
-    ```sh
-    python generate_data.py
-    ```
-
-5.  **Lint and Format Code:**
+4.  **Lint and Format Code:**
     This project uses `ruff` for fast linting and formatting.
     ```sh
     # Check for linting errors and formatting issues
@@ -94,7 +89,17 @@ This project is configured with two GitHub Actions workflows.
 
 ### 2. Publish Docker Image (`docker-publish.yml`)
 
--   **Trigger**: Runs on every `push` to the `main` branch.
+-   **Trigger**: Runs whenever a new tag matching the pattern `v*.*` or `v*.*.*` (e.g., `v1.0`, `v1.2.3`) is pushed to the repository.
 -   **Jobs**:
     -   `push_to_registry`: Logs into the GitHub Container Registry (GHCR), builds the Docker image, and pushes it.
--   **Result**: The container image will be available at `ghcr.io/<your-github-username>/<your-repository-name>`. For example: `ghcr.io/eoxhub/algorithm-container-example`.
+-   **Result**: The container image will be tagged with the version from the Git tag and published to GHCR. For example, pushing tag `v1.2.3` will create the image `ghcr.io/your-github-username/your-repository-name:1.2.3`.
+
+#### How to Release a New Version
+
+1.  Ensure your `main` branch has the code you want to release.
+2.  Create and push a new tag:
+    ```sh
+    git tag v0.0.1
+    git push origin v0.0.1
+    ```
+3.  This will trigger the `Publish Docker image` workflow, which will build and publish your new container version.
