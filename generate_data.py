@@ -12,6 +12,6 @@ file_path = os.path.join(output_dir, "observation_result.txt")
 with open(file_path, "w") as file:
     file.write("Algorithm executed successfully.\n")
     file.write(f"Timestamp: {timestamp}\n")
-    file.write("Status: Nominal\n")
+    file.write("Status: Nominal as expected\n")
 
 print(f"Process complete. Data written to {file_path}")
